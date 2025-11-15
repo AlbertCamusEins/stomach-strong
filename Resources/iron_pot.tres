@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://b7igb0rd16158"
 script = ExtResource("2_mqnec")
 hot_swappable = true
 slot = 0
+weapon_type = 1
 max_health = 0
 max_satiety = 0
 max_mana = 0

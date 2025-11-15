@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://d35hcpp7ibk1a"]
+
+[ext_resource type="Script" uid="uid://b7ddghsgeh82d" path="res://Scripts/ConsumableComponent.gd" id="1_1tas7"]
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="1_utpxy"]
+[ext_resource type="Script" uid="uid://bnse1gxc5flwh" path="res://Scripts/EquipmentComponent.gd" id="2_ub2vg"]
+[ext_resource type="Texture2D" uid="uid://cugiukyb1bnn6" path="res://Assets/blade-grass-leaf.png" id="3_ub2vg"]
+
+[sub_resource type="Resource" id="Resource_soy3b"]
+script = ExtResource("1_1tas7")
+health_change = -10
+satiety_change = 10
+mana_change = 0
+add_max_health = 0
+add_max_satiety = 0
+add_max_mana = 0
+add_attack = 10
+add_defense = 0
+add_base_speed = 5
+metadata/_custom_type_script = "uid://b7ddghsgeh82d"
+
+[sub_resource type="Resource" id="Resource_55rjw"]
+script = ExtResource("2_ub2vg")
+hot_swappable = true
+slot = 0
+weapon_type = 0
+max_health = 0
+max_satiety = 0
+max_mana = 0
+attack = 10
+defense = 0
+base_speed = 0
+food_effect = ""
+skill_power = 0
+metadata/_custom_type_script = "uid://bnse1gxc5flwh"
+
+[resource]
+script = ExtResource("1_utpxy")
+item_name = "blade grass leaf"
+description = "leaf of blade grass"
+stackable = true
+max_stack_size = 5
+icon = ExtResource("3_ub2vg")
+consumable_props = SubResource("Resource_soy3b")
+equipment_props = SubResource("Resource_55rjw")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

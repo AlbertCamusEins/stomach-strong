@@ -1,4 +1,10 @@
 Item
+HarvestableItem
+EnemyStats
+EnemyBehaviorProfile
+EnemyAnimatorProfile
+EnemyData
+SpriteFrames
 CraftingRecipe
 Skill
 Quest
@@ -6,7 +12,3 @@ DialogueActionAddItem
 DialogueAction
 Dialogue
 CharacterData
-Encounter
-Recipe
-CookingTechnique
-CharacterStats

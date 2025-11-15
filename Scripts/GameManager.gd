@@ -6,6 +6,7 @@ extends Node
 const WORLD_MAP_SCENE = "res://Scenes/WorldMap.tscn"
 const BATTLE_SCENE = "res://Scenes/battle.tscn"
 const SAVE_FILE_PATH = "user://savegame.tres"
+const PERSISTENT_SCENES = [WORLD_MAP_SCENE]
 
 # --- 资源引用 (用于初始化) ---
 # 在 Godot 编辑器的 Autoload 设置中，为 GameManager 添加这些属性。
@@ -35,6 +36,8 @@ var player_known_recipes: Array[Recipe]
 var player_known_techniques: Array[CookingTechnique]
 
 var current_scene: Node = null
+var current_scene_path: String = ""
+var persistent_scene_cache: Dictionary = {}
 var player_node: Node = null
 
 # --- [新增] 队伍管理变量 (添加到“实时游戏数据”部分) ---
@@ -548,20 +551,39 @@ func _ready():
 
 # --- 核心功能：切换场景 ---
 func switch_to_scene(scene_path: String, battle_data: Dictionary = {}):
+	current_scene_path = scene_path
 	call_deferred("_deferred_switch_scene", scene_path, battle_data)
 
 func _deferred_switch_scene(scene_path: String, battle_data: Dictionary):
+	var root := get_tree().get_root()
+
+	# 1. 如果当前场景需要保留，就缓存并先从场景树移除
 	if is_instance_valid(current_scene):
-		current_scene.free()
-	
-	var next_scene_res = load(scene_path)
-	current_scene = next_scene_res.instantiate()
-	get_tree().get_root().add_child(current_scene)
-	
-	# 如果是切换到战斗场景，就把数据传递过去。
+		if PERSISTENT_SCENES.has(current_scene.scene_file_path):
+			current_scene.visible = false
+			current_scene.set_process(false)
+			if current_scene.get_parent():
+				current_scene.get_parent().remove_child(current_scene)
+			persistent_scene_cache[current_scene.scene_file_path] = current_scene
+		else:
+			current_scene.queue_free()
+
+	# 2. 复用已缓存的场景，否则重新实例化
+	if persistent_scene_cache.has(scene_path):
+		current_scene = persistent_scene_cache[scene_path]
+		persistent_scene_cache.erase(scene_path)
+	else:
+		var next_scene_res := load(scene_path)
+		current_scene = next_scene_res.instantiate()
+
+	root.add_child(current_scene)
+	current_scene.visible = true
+	current_scene.set_process(true)
+
+	# 3. 如有战斗数据，继续按原逻辑处理
 	if scene_path == BATTLE_SCENE:
-		# 从 battle manager节点中获取敌人信息
 		current_scene.get_node("BattleManager").setup_battle(battle_data)
+
 
 # --- 游戏流程函数 ---
 # 开始和结束战斗（多人对战版）

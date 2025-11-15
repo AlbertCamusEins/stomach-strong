@@ -1,141 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4trqsgcb7hcb"]
+[gd_scene load_steps=6 format=3 uid="uid://c4trqsgcb7hcb"]
 
-[ext_resource type="Texture2D" uid="uid://bs3dugp57qmin" path="res://Assets/grass-worm-animation-Sheet.png" id="1_m1htj"]
 [ext_resource type="Script" uid="uid://bsrefyo884ct0" path="res://Scripts/Enemy2.gd" id="1_xeo28"]
-[ext_resource type="Texture2D" uid="uid://cq0pgmcv4p562" path="res://Assets/grass-worm-walk-Sheet.png" id="3_xeo28"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wovta"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xeo28"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kpr8r"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1exfc"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mo1ky"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6bs3c"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uoxpr"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idouy"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0o0ue"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6s1gy"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(288, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uihya"]
-atlas = ExtResource("1_m1htj")
-region = Rect2(320, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_27ry8"]
-atlas = ExtResource("3_xeo28")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_esfq3"]
-atlas = ExtResource("3_xeo28")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlal6"]
-atlas = ExtResource("3_xeo28")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dascy"]
-atlas = ExtResource("3_xeo28")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_27ry8"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wovta")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xeo28")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kpr8r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1exfc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mo1ky")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6bs3c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uoxpr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_idouy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0o0ue")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6s1gy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uihya")
-}],
-"loop": false,
-"name": &"birth",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_27ry8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_esfq3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qlal6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dascy")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://ckkwjuwdcmigo" path="res://Resources/BushBug.tres" id="2_wovta"]
+[ext_resource type="Shape2D" uid="uid://cab8vliogirmk" path="res://Resources/BushBug_birth_area.tres" id="3_kpr8r"]
+[ext_resource type="Shape2D" uid="uid://cyyqxoo2tpfgj" path="res://Resources/BushBug_fear_area.tres" id="4_1exfc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wovta"]
 size = Vector2(32, 34)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wovta"]
-radius = 139.004
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xeo28"]
-radius = 60.0333
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_xeo28")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_27ry8")
+sprite_frames = ExtResource("2_wovta")
 animation = &"birth"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -145,9 +22,9 @@ shape = SubResource("RectangleShape2D_wovta")
 [node name="BirthTriggerArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BirthTriggerArea"]
-shape = SubResource("CircleShape2D_wovta")
+shape = ExtResource("3_kpr8r")
 
 [node name="FearArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FearArea"]
-shape = SubResource("CircleShape2D_xeo28")
+shape = ExtResource("4_1exfc")

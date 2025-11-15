@@ -3,7 +3,5 @@
 [ext_resource type="Script" uid="uid://bkgnqj64oscj1" path="res://Scripts/ItemActionMenu.gd" id="1_ajtnk"]
 
 [node name="ItemActionMenu" type="PopupMenu"]
-visible = true
 transient_to_focused = true
-unfocusable = true
 script = ExtResource("1_ajtnk")

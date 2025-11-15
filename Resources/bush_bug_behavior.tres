@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyBehaviorProfile" load_steps=3 format=3 uid="uid://dobdhg7r2wh7p"]
+
+[ext_resource type="Resource" uid="uid://j4v36lmn88u4" path="res://Resources/enemy_group_1.tres" id="1_stvus"]
+[ext_resource type="Script" uid="uid://c1tmettd2rsq6" path="res://Scripts/EnemyBehaviorProfile.gd" id="1_xafe0"]
+
+[resource]
+script = ExtResource("1_xafe0")
+uses_sleep_cycle = true
+uses_wander_ai = true
+can_flee_from_player = true
+triggers_battle_on_contact = true
+wander_speed = 40.0
+wander_radius = 120.0
+wander_target_tolerance = 6.0
+wander_retarget_interval = 1.5
+flee_speed = 100.0
+flee_side_step_factor = 0.45
+flee_cooldown = 0.1
+wake_up_animation_time = 2.0
+fall_asleep_delay = 0.0
+encounter_resource = ExtResource("1_stvus")
+remove_after_battle = true
+battle_reenable_delay = 0.0
+metadata/_custom_type_script = "uid://c1tmettd2rsq6"

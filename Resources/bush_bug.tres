@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://bya83o307bbej"]
+
+[ext_resource type="Resource" uid="uid://b031pojhe520k" path="res://Resources/bush_bug_anim.tres" id="1_d7mkq"]
+[ext_resource type="Script" uid="uid://etw17btwd6j1" path="res://Scripts/InventorySlot.gd" id="1_yjjc3"]
+[ext_resource type="Resource" uid="uid://dobdhg7r2wh7p" path="res://Resources/bush_bug_behavior.tres" id="2_86mmg"]
+[ext_resource type="Script" uid="uid://cmshd6w3pn0ks" path="res://Scripts/EnemyData.gd" id="2_d7mkq"]
+[ext_resource type="Resource" uid="uid://cfp3lwwgch0j8" path="res://Resources/bush_bug_stats.tres" id="5_emx1k"]
+
+[resource]
+script = ExtResource("2_d7mkq")
+enemy_id = "0001"
+enemy_name = "bush bug"
+behavior_profile = ExtResource("2_86mmg")
+stats = ExtResource("5_emx1k")
+animator_profile = ExtResource("1_d7mkq")
+equipped_slots = {}
+loot_drops = Array[ExtResource("1_yjjc3")]([])
+metadata/_custom_type_script = "uid://cmshd6w3pn0ks"

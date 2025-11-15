@@ -508,6 +508,7 @@ func _on_target_selected(target: Combatant):
 				target.stats.change_satiety(props.satiety_change)
 			battle_ui.update_all_statuses()
 			battle_ui.log_message("%s 对 %s 使用了 %s" % [attacker.name, target.name, pending_item.item_name])
+			GameManager.remove_item(pending_item,1)
 		else:
 			battle_ui.log_message("物品无效或不可使用")
 		pending_action_type = ""
@@ -562,7 +563,7 @@ func _on_targeting_cancelled():
 	# 让玩家可以重新选择行动
 	change_state(State.PLAYER_INPUT)
 
-# 在物品菜单中选择具体消耗品（对当前角色立即生效）
+# 在物品菜单中选择具体消耗品（对当前角色立即生效）（已弃用）
 
 func _on_player_use_food(food_item: Item):
 	if current_state != State.PLAYER_INPUT: return
@@ -580,7 +581,8 @@ func _on_player_use_food(food_item: Item):
 		current_actor.stats.change_satiety(props.satiety_change)
 	battle_ui.update_all_statuses()
 	battle_ui.log_message("%s 使用了 %s" % [current_actor.name, food_item.item_name])
-	# 可选：扣除物品数量 -> GameManager.remove_item(food_item, 1)
+	# 扣除物品数量 -> GameManager.remove_item(food_item, 1)
+	GameManager.remove_item(food_item, 1)
 	check_for_win_lose()
 
 # 在技能菜单中选择具体技能

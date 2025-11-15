@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bv8nwk1opdjlw"]
+[gd_scene load_steps=31 format=3 uid="uid://bv8nwk1opdjlw"]
 
 [ext_resource type="PackedScene" uid="uid://4y05vc33l6jx" path="res://Scenes/Character.tscn" id="1_h0vor"]
 [ext_resource type="Script" uid="uid://cum21nkxacfyc" path="res://Scripts/WorldMap.gd" id="1_lgebn"]
@@ -15,18 +15,21 @@
 [ext_resource type="Resource" uid="uid://dgpd4648nal6n" path="res://Resources/apple_cross_recipe.tres" id="10_r764t"]
 [ext_resource type="PackedScene" uid="uid://bhn0ey82rjjr6" path="res://UI/QuestJournalUI.tscn" id="11_3xaw4"]
 [ext_resource type="Texture2D" uid="uid://dt6f0fr678uln" path="res://Assets/spaceship-crashed.png" id="11_j6kvx"]
+[ext_resource type="PackedScene" uid="uid://co7fuckxcmw21" path="res://UI/Tips.tscn" id="11_l15o2"]
 [ext_resource type="PackedScene" uid="uid://bvdi3p2fcoxc1" path="res://Scenes/WorldItem.tscn" id="12_luyaf"]
 [ext_resource type="Resource" uid="uid://c20k3kgf3o340" path="res://Resources/banana.tres" id="13_0vgg2"]
 [ext_resource type="Resource" uid="uid://dg1n8k682l5lp" path="res://Resources/apple.tres" id="14_5d56a"]
-[ext_resource type="PackedScene" uid="uid://cvtwcxxlvg3g2" path="res://Scenes/EncounterEntity.tscn" id="15_y6rwo"]
 [ext_resource type="Resource" uid="uid://bijmywa71k1gc" path="res://Resources/mushroom.tres" id="15_yndps"]
-[ext_resource type="Resource" uid="uid://j4v36lmn88u4" path="res://Resources/enemy_group_1.tres" id="16_y6rwo"]
+[ext_resource type="Resource" uid="uid://b2y5mf06na1na" path="res://Resources/rabnail_data.tres" id="17_cobut"]
 [ext_resource type="Texture2D" uid="uid://c6dt0pqw3224h" path="res://Assets/grassbeast-grass.png" id="17_n74fn"]
 [ext_resource type="PackedScene" uid="uid://dc4dc4lchwb3m" path="res://Scenes/Map.tscn" id="17_u8pi1"]
-[ext_resource type="PackedScene" uid="uid://c4trqsgcb7hcb" path="res://Scenes/Enemy.tscn" id="17_ymbeh"]
 [ext_resource type="Resource" uid="uid://fs7l0cm0i77b" path="res://Resources/chef_dialogue.tres" id="18_u8pi1"]
 [ext_resource type="PackedScene" uid="uid://mjrdj64swlve" path="res://UI/PlayerMenu.tscn" id="18_yndps"]
 [ext_resource type="PackedScene" uid="uid://dflmsf3xes8u4" path="res://Scenes/Tree.tscn" id="20_xetgg"]
+[ext_resource type="PackedScene" uid="uid://cwir3khsb6yor" path="res://Scenes/Harvestable.tscn" id="25_mq3ic"]
+[ext_resource type="Resource" uid="uid://ca6he48knnsuu" path="res://Resources/blade_grass.tres" id="26_l15o2"]
+[ext_resource type="PackedScene" uid="uid://b8jic67wuybkk" path="res://Scenes/EnemyEntity.tscn" id="27_mq3ic"]
+[ext_resource type="Resource" uid="uid://bya83o307bbej" path="res://Resources/bush_bug.tres" id="28_l15o2"]
 
 [node name="WorldMap" type="Node2D" groups=["Player"]]
 script = ExtResource("1_lgebn")
@@ -52,35 +55,43 @@ visible = false
 visible = false
 recipes = Array[ExtResource("8_dpfav")]([ExtResource("9_r764t"), ExtResource("10_r764t")])
 
+[node name="Tips" parent="UI" instance=ExtResource("11_l15o2")]
+
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Map" parent="Ysort" instance=ExtResource("17_u8pi1")]
-y_sort_enabled = true
-position = Vector2(-128, 30)
+position = Vector2(0, -4)
 
 [node name="Tree" parent="Ysort" instance=ExtResource("20_xetgg")]
+z_as_relative = false
 y_sort_enabled = true
-position = Vector2(540, 426)
+position = Vector2(813, 612)
 
 [node name="Character" parent="Ysort" groups=["Player"] instance=ExtResource("1_h0vor")]
 y_sort_enabled = true
-position = Vector2(1069, 448)
+position = Vector2(665, 599)
 
 [node name="Creatures" type="Node2D" parent="Ysort"]
 y_sort_enabled = true
 
-[node name="Enemy" parent="Ysort/Creatures" instance=ExtResource("17_ymbeh")]
-position = Vector2(1349, 485)
+[node name="BushBug1" parent="Ysort/Creatures" instance=ExtResource("27_mq3ic")]
+position = Vector2(1321, 442)
+enemy_data = ExtResource("28_l15o2")
 
-[node name="Enemy2" parent="Ysort/Creatures" instance=ExtResource("17_ymbeh")]
-position = Vector2(253, 471)
+[node name="BushBug2" parent="Ysort/Creatures" instance=ExtResource("27_mq3ic")]
+position = Vector2(251, 472)
+enemy_data = ExtResource("28_l15o2")
 
-[node name="Enemy3" parent="Ysort/Creatures" instance=ExtResource("17_ymbeh")]
-y_sort_enabled = true
-position = Vector2(162, 326)
+[node name="BushBug3" parent="Ysort/Creatures" instance=ExtResource("27_mq3ic")]
+position = Vector2(160, 326)
+enemy_data = ExtResource("28_l15o2")
 
-[node name="WorldDeco" parent="Ysort" instance=ExtResource("9_sclet")]
+[node name="Rabnail1" parent="Ysort/Creatures" instance=ExtResource("27_mq3ic")]
+position = Vector2(1000, 319)
+enemy_data = ExtResource("17_cobut")
+
+[node name="Spaceship" parent="Ysort" instance=ExtResource("9_sclet")]
 y_sort_enabled = true
 position = Vector2(1357, 360)
 texture = ExtResource("11_j6kvx")
@@ -112,30 +123,42 @@ item = ExtResource("14_5d56a")
 position = Vector2(1175, 367)
 item = ExtResource("15_yndps")
 
+[node name="Mushroom5" parent="Ysort/WorldItem" instance=ExtResource("12_luyaf")]
+position = Vector2(1150, 457)
+item = ExtResource("15_yndps")
+
+[node name="Mushroom6" parent="Ysort/WorldItem" instance=ExtResource("12_luyaf")]
+position = Vector2(1085, 524)
+item = ExtResource("15_yndps")
+
+[node name="Mushroom4" parent="Ysort/WorldItem" instance=ExtResource("12_luyaf")]
+position = Vector2(564, 185)
+item = ExtResource("15_yndps")
+
 [node name="Mushroom2" parent="Ysort/WorldItem" instance=ExtResource("12_luyaf")]
-position = Vector2(1119, 355)
+position = Vector2(815, 215)
 item = ExtResource("15_yndps")
 
 [node name="Mushroom3" parent="Ysort/WorldItem" instance=ExtResource("12_luyaf")]
-position = Vector2(1060, 349)
+position = Vector2(675, 201)
 item = ExtResource("15_yndps")
 
-[node name="WorldDeco2" parent="Ysort" instance=ExtResource("9_sclet")]
+[node name="Bush" parent="Ysort" instance=ExtResource("9_sclet")]
 position = Vector2(420, 214)
 texture = ExtResource("17_n74fn")
+
+[node name="Harvestable" parent="Ysort" instance=ExtResource("25_mq3ic")]
+y_sort_enabled = true
+position = Vector2(802, 473)
+harvestable_item = ExtResource("26_l15o2")
 
 [node name="CookingSpot" parent="." groups=["CookingSpots"] instance=ExtResource("6_6g17r")]
 visible = false
 position = Vector2(287, 406)
 
-[node name="EncounterEntity" parent="." instance=ExtResource("15_y6rwo")]
-position = Vector2(437, 330)
-encounter = ExtResource("16_y6rwo")
-
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="NPC" parent="NPCs" groups=["NPCs"] instance=ExtResource("8_e6b1v")]
-visible = false
 position = Vector2(1125, 277)
 dialogue = ExtResource("9_tp53l")
 

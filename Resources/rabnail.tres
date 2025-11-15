@@ -1,0 +1,47 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dhtoa2hx8impf"]
+
+[ext_resource type="Texture2D" uid="uid://cr2dk5qirc3g2" path="res://Assets/rabnail-Sheet.png" id="1_ppo02"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfmnj"]
+atlas = ExtResource("1_ppo02")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70jkp"]
+atlas = ExtResource("1_ppo02")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i04tw"]
+atlas = ExtResource("1_ppo02")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4voie"]
+atlas = ExtResource("1_ppo02")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfmnj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfmnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70jkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i04tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4voie")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]

@@ -1,32 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dflmsf3xes8u4"]
+[gd_scene load_steps=4 format=3 uid="uid://dflmsf3xes8u4"]
 
-[ext_resource type="Texture2D" uid="uid://2vjxpummt304" path="res://Assets/tree.png" id="1_gtca3"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_itkj8"]
-atlas = ExtResource("1_gtca3")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0suky"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_itkj8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="PackedScene" uid="uid://cwir3khsb6yor" path="res://Scenes/Harvestable.tscn" id="1_gtca3"]
+[ext_resource type="Resource" uid="uid://b1tw8x0avuvfk" path="res://Resources/tree_to_harvest.tres" id="2_itkj8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e63j"]
 size = Vector2(15, 19.5)
 
-[node name="Tree" type="CharacterBody2D"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 7)
-sprite_frames = SubResource("SpriteFrames_0suky")
-offset = Vector2(0, -20)
+[node name="Tree" type="StaticBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 11.75)
 shape = SubResource("RectangleShape2D_0e63j")
+
+[node name="Harvestable" parent="." instance=ExtResource("1_gtca3")]
+harvestable_item = ExtResource("2_itkj8")
+can_harvest = true

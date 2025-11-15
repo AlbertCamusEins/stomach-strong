@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8jic67wuybkk"]
+
+[ext_resource type="Script" uid="uid://cyb6sv72nfs2e" path="res://Scripts/EnemyEntity.gd" id="1_1y73v"]
+[ext_resource type="Shape2D" uid="uid://cab8vliogirmk" path="res://Resources/BushBug_birth_area.tres" id="2_kd3pb"]
+[ext_resource type="Shape2D" uid="uid://cyyqxoo2tpfgj" path="res://Resources/BushBug_fear_area.tres" id="3_x211w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s3w85"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxrfj"]
+radius = 13.0384
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1y73v"]
+radius = 33.0
+
+[node name="EnemyEntity" type="CharacterBody2D"]
+y_sort_enabled = true
+velocity = Vector2(-35.972, -17.4934)
+script = ExtResource("1_1y73v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s3w85")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gxrfj")
+
+[node name="BirthTriggerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BirthTriggerArea"]
+shape = ExtResource("2_kd3pb")
+
+[node name="FearArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FearArea"]
+shape = ExtResource("3_x211w")
+
+[node name="BattleTriggerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleTriggerArea"]
+shape = SubResource("CircleShape2D_1y73v")

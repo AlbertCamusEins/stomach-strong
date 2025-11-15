@@ -273,5 +273,4 @@ script = ExtResource("1_xq7go")
 dialogue_lines = Array[Dictionary]([])
 start_node_id = "judge"
 nodes = Array[ExtResource("1_jdyj6")]([SubResource("Resource_qsbvf"), SubResource("Resource_h68fc"), SubResource("Resource_fiiwa"), SubResource("Resource_jdqe7"), SubResource("Resource_tg37i"), SubResource("Resource_8ieyy"), SubResource("Resource_xbjn3"), SubResource("Resource_mqaj0"), SubResource("Resource_o2yrv"), SubResource("Resource_lragp"), SubResource("Resource_3ml1e"), SubResource("Resource_ymamr"), SubResource("Resource_mkjb3"), SubResource("Resource_5vvct")])
-quest_to_start = ExtResource("11_pdlja")
 metadata/_custom_type_script = "uid://cbwlurgsbf1vj"

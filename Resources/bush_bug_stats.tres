@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://cfp3lwwgch0j8"]
+
+[ext_resource type="Script" uid="uid://c2toj2vr2ya7p" path="res://Scripts/EnemyStats.gd" id="1_2adyb"]
+[ext_resource type="Script" uid="uid://mpuepqpgye8m" path="res://Scripts/Skill.gd" id="2_kwffu"]
+
+[resource]
+script = ExtResource("1_2adyb")
+base_max_health = 100
+base_max_satiety = 100
+base_max_mana = 50
+base_attack = 10
+base_defense = 5
+base_speed = 10
+current_health = 100
+current_satiety = 100
+current_mana = 50
+max_health = 100
+max_satiety = 100
+max_mana = 50
+attack = 10
+defense = 5
+speed = 10
+skills = Array[ExtResource("2_kwffu")]([])
+metadata/_custom_type_script = "uid://c2toj2vr2ya7p"

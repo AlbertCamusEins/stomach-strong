@@ -146,8 +146,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ItemActionMenu" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("2_dxgqy")]
-visible = false
-unfocusable = false
 
 [node name="InventoryGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2

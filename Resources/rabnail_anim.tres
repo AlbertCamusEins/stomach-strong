@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyAnimatorProfile" load_steps=3 format=3 uid="uid://8muvgbctkjvg"]
+
+[ext_resource type="Script" uid="uid://cfdkc1it30t8d" path="res://Scripts/EnemyAnimatorProfile.gd" id="1_t4bds"]
+[ext_resource type="SpriteFrames" uid="uid://dhtoa2hx8impf" path="res://Resources/rabnail.tres" id="2_ohf7s"]
+
+[resource]
+script = ExtResource("1_t4bds")
+world_sprite_frames = ExtResource("2_ohf7s")
+world_default_animation = &"idle"
+world_state_animations = {
+&"fleeing": &"run",
+&"sleeping": &"idle",
+&"waking_up": &"birth",
+&"wandering": &"walk"
+}
+world_faces_movement_direction = true
+battle_default_animation = &"idle"
+battle_state_animations = {}
+metadata/_custom_type_script = "uid://cfdkc1it30t8d"

@@ -185,7 +185,7 @@ func _update_forge_button(index: int) -> void:
 	if data and data.has("item"):
 		var item: Item = data["item"]
 		button.icon = item.icon
-		button.text = item.item_name
+		#button.text = item.item_name
 	else:
 		button.icon = null
 		button.text = ""

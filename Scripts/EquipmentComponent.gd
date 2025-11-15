@@ -8,8 +8,13 @@ enum EquipmentSlot {
 	LEGS,       # 腿部
 	ACCESSORY   # 饰品
 }
+enum  Sharpness {
+	SHARP, #利器
+	BLUNT  #钝器
+}
 @export var hot_swappable: bool = true
 @export var slot: EquipmentSlot
+@export var weapon_type: Sharpness
 
 @export_group("Stat Bonuses")
 @export var max_health: int

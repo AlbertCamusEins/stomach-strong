@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://b2y5mf06na1na"]
+
+[ext_resource type="Script" uid="uid://etw17btwd6j1" path="res://Scripts/InventorySlot.gd" id="1_hjegd"]
+[ext_resource type="Resource" uid="uid://8muvgbctkjvg" path="res://Resources/rabnail_anim.tres" id="1_xu1yy"]
+[ext_resource type="Resource" uid="uid://cfwxg3tp727ac" path="res://Resources/rabnail_behavior.tres" id="2_rhef4"]
+[ext_resource type="Script" uid="uid://cmshd6w3pn0ks" path="res://Scripts/EnemyData.gd" id="2_xu1yy"]
+[ext_resource type="Resource" uid="uid://bpf1csxm7l0m6" path="res://Resources/rabnail_stats.tres" id="5_a2uqn"]
+
+[resource]
+script = ExtResource("2_xu1yy")
+enemy_id = "0002"
+enemy_name = "rabnail"
+behavior_profile = ExtResource("2_rhef4")
+stats = ExtResource("5_a2uqn")
+animator_profile = ExtResource("1_xu1yy")
+equipped_slots = {}
+loot_drops = Array[ExtResource("1_hjegd")]([])
+metadata/_custom_type_script = "uid://cmshd6w3pn0ks"

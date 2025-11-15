@@ -333,19 +333,13 @@ func _on_equipment_slot_clicked(slot_enum: EquipmentComponent.EquipmentSlot) -> 
 	refresh_selected_character()
 	_update_inventory_display()
 
-func _on_inventory_item_clicked(item: Item) -> void:
+func _consume_inventory_item(item: Item) -> void:
 	if selected_character_id.is_empty() or not item:
 		return
 	if not GameManager.all_characters.has(selected_character_id):
 		return
 	var character: CharacterData = GameManager.all_characters[selected_character_id]
 	if not character:
-		return
-
-	if item.equipment_props:
-		GameManager.equip_item_for_character(selected_character_id, item)
-		refresh_selected_character()
-		_update_inventory_display()
 		return
 
 	if item.consumable_props and character.stats:
@@ -510,6 +504,8 @@ func _execute_inventory_action(action_id: int, item: Item) -> void:
 			_equip_item(item)
 		ItemActionMenu.Action.ADD_TO_SHORTCUT:
 			QuickbarManager.add_from_inventory(item)
+		ItemActionMenu.Action.DROP: #丢弃物品占位，待补充
+			pass
 
 # 将原有装备与食用逻辑提炼成复用函数
 func _equip_item(item: Item) -> void:
@@ -519,7 +515,7 @@ func _equip_item(item: Item) -> void:
 
 func _consume_item(item: Item) -> void:
 	if item.consumable_props and not selected_character_id.is_empty():
-		_on_inventory_item_clicked(item) # 或者把消耗逻辑拆成独立函数后调用
+		_consume_inventory_item(item) # 或者把消耗逻辑拆成独立函数后调用
 
 func _on_inventory_action_selected(action: ItemActionMenu.Action, item: Item, ctx: Dictionary) -> void:
 	inventory_cursor = ctx.get("slot_index", inventory_cursor)

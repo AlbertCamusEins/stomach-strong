@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://db35vl7m4m44j"]
+
+[ext_resource type="Texture2D" uid="uid://mqybgyin5kt2" path="res://Assets/wood.png" id="1_eml40"]
+[ext_resource type="Script" uid="uid://cthurke7ur60a" path="res://Scripts/Item.gd" id="1_irjvf"]
+
+[resource]
+script = ExtResource("1_irjvf")
+item_name = "wood"
+description = "a piece of wood"
+stackable = true
+max_stack_size = 5
+icon = ExtResource("1_eml40")
+metadata/_custom_type_script = "uid://cthurke7ur60a"

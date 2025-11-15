@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyAnimatorProfile" load_steps=3 format=3 uid="uid://b031pojhe520k"]
+
+[ext_resource type="Script" uid="uid://cfdkc1it30t8d" path="res://Scripts/EnemyAnimatorProfile.gd" id="1_hjqh3"]
+[ext_resource type="SpriteFrames" uid="uid://ckkwjuwdcmigo" path="res://Resources/BushBug.tres" id="2_hwh85"]
+
+[resource]
+script = ExtResource("1_hjqh3")
+world_sprite_frames = ExtResource("2_hwh85")
+world_default_animation = &"idle"
+world_state_animations = {
+&"fleeing": &"walk",
+&"sleeping": &"sleep",
+&"waking_up": &"birth",
+&"wandering": &"walk"
+}
+world_faces_movement_direction = true
+battle_default_animation = &"idle"
+battle_state_animations = {}
+metadata/_custom_type_script = "uid://cfdkc1it30t8d"

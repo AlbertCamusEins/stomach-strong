@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyBehaviorProfile" load_steps=2 format=3 uid="uid://cfwxg3tp727ac"]
+
+[ext_resource type="Script" uid="uid://c1tmettd2rsq6" path="res://Scripts/EnemyBehaviorProfile.gd" id="1_3201u"]
+
+[resource]
+script = ExtResource("1_3201u")
+uses_sleep_cycle = false
+uses_wander_ai = true
+can_flee_from_player = false
+triggers_battle_on_contact = true
+wander_speed = 10.0
+wander_radius = 120.0
+wander_target_tolerance = 6.0
+wander_retarget_interval = 1.5
+flee_speed = 120.0
+flee_side_step_factor = 0.45
+flee_cooldown = 3.0
+wake_up_animation_time = 1.0
+fall_asleep_delay = 2.0
+remove_after_battle = true
+battle_reenable_delay = 0.0
+metadata/_custom_type_script = "uid://c1tmettd2rsq6"

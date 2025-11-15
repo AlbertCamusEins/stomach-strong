@@ -17,6 +17,9 @@ class_name EncounterEntity extends CharacterBody2D
 var start_position: Vector2
 var wander_target: Vector2
 
+# 是否销毁
+var remove_after_battle: bool = false
+
 func _ready():
 	# 记录初始位置，用于计算游荡范围
 	start_position = global_position
@@ -24,6 +27,10 @@ func _ready():
 	battle_trigger_area.body_entered.connect(_on_battle_trigger_area_body_entered)
 	# 开始第一次游荡
 	_pick_new_wander_target()
+
+func _enter_tree() -> void:
+	if remove_after_battle:
+		call_deferred("queue_free")
 
 func _physics_process(delta):
 	# 如果到达了目标点，就选择下一个目标点
@@ -41,6 +48,10 @@ func _on_battle_trigger_area_body_entered(body):
 	if body == self:
 		return
 	if body.is_in_group("Player"):
+		if remove_after_battle:
+			return
+		remove_after_battle = true
+		battle_trigger_area.set_deferred("monitoring",false)
 		print("玩家靠近敌人 %s, 准备开始战斗！" % self.name)
 		# 命令GameManager开始战斗
 		GameManager.start_battle(encounter)
