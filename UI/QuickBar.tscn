@@ -78,5 +78,3 @@ layout_mode = 2
 theme = ExtResource("2_2qtqd")
 
 [node name="ItemActionMenu" parent="SlotsContainer" instance=ExtResource("1_34in0")]
-visible = false
-unfocusable = false

@@ -138,7 +138,12 @@ func start_quest(quest_resource: Quest):
 	print("已接取任务: %s" % new_quest.quest_name)
 	# 任务接取后，立即检查一次当前背包是否满足条件
 	for slot in player_current_inventory:
-		update_quest_progress(QuestObjective.ObjectiveType.COLLECT, slot.item, count_item(slot.item))
+		if slot and slot.item:
+			update_quest_progress(
+				QuestObjective.ObjectiveType.COLLECT,
+				slot.item,
+				InventoryManager.count_item(slot.item)
+			)
 
 # 检查某个任务的状态
 func get_quest_state(quest_id: String) -> Quest.QuestState:
@@ -162,75 +167,6 @@ func clear_dialogue_flag(flag_name: String) -> void:
 	if dialogue_flags.has(flag_name):
 		dialogue_flags.erase(flag_name)
 
-
-# --- 新增：物品管理工具函数 ---
-func count_item(item_to_find: Item) -> int:
-	var count = 0
-	for slot in player_current_inventory:
-		# 通过比较资源的名称是否相同来判断唯一性
-		if slot.item.item_name == item_to_find.item_name:
-			count += slot.quantity
-	return count
-
-func remove_item(item_to_remove: Item, quantity: int):
-	var remaining_to_remove = quantity
-	# 从后往前遍历，这样在删除槽位时不会影响后续索引
-	for i in range(player_current_inventory.size() - 1, -1, -1):
-		if remaining_to_remove <= 0: break
-		
-		var slot = player_current_inventory[i]
-		if slot.item.item_name == item_to_remove.item_name:
-			var amount_to_remove = min(remaining_to_remove, slot.quantity)
-			slot.quantity -= amount_to_remove
-			remaining_to_remove -= amount_to_remove
-			
-			# 如果这个槽位的物品被减到0，就移除整个槽位
-			if slot.quantity <= 0:
-				player_current_inventory.remove_at(i)
-	# 移除物品后检查任务进度
-	var item_count = count_item(item_to_remove)
-	update_quest_progress(QuestObjective.ObjectiveType.COLLECT, item_to_remove, item_count)
-
-func add_item(item_to_add: Item, quantity: int):
-	var item_count = count_item(item_to_add)
-	
-	# 逻辑一：如果物品不可堆叠，则为每一个都创建一个新槽位
-	if not item_to_add.stackable:
-		for i in range(quantity):
-			var slot = InventorySlot.new()
-			slot.item = item_to_add.duplicate() # 关键：使用副本
-			slot.quantity = 1
-			player_current_inventory.append(slot)
-		# 完成后判断任务完成进度，然后退出函数
-		item_count = count_item(item_to_add)
-		update_quest_progress(QuestObjective.ObjectiveType.COLLECT, item_to_add, item_count)
-		return
-
-	# --- 如果代码能运行到这里，说明物品是可堆叠的 ---
-	
-	var remaining_quantity = quantity
-	
-	# 逻辑二：先尝试填充现有的、未满的堆栈
-	for slot in player_current_inventory:
-		if remaining_quantity <= 0: break
-		if slot.item.item_name == item_to_add.item_name and slot.quantity < slot.item.max_stack_size:
-			var can_add = item_to_add.max_stack_size - slot.quantity
-			var amount_to_add = min(remaining_quantity, can_add)
-			slot.quantity += amount_to_add
-			remaining_quantity -= amount_to_add
-			item_count = count_item(item_to_add)
-			update_quest_progress(QuestObjective.ObjectiveType.COLLECT, item_to_add, item_count)
-
-	# 逻辑三：如果还有剩余的物品，则为它们创建新的堆栈
-	while remaining_quantity > 0:
-		var slot = InventorySlot.new()
-		slot.item = item_to_add.duplicate() # 关键：使用副本
-		
-		var amount_to_add = min(remaining_quantity, item_to_add.max_stack_size)
-		slot.quantity = amount_to_add
-		remaining_quantity -= amount_to_add
-		# 注意：需要修改逻辑以更新任务进度
-		player_current_inventory.append(slot)
 
 # --- 存档读档 ---
 func save_game():
@@ -408,43 +344,6 @@ func _register_character_equipment(character_data: CharacterData) -> void:
 	_sync_character_equipped_slots(character_id, snapshot)
 	calculate_total_stats(character_id)
 
-func equip_item_for_character(character_id: String, item_to_equip: Item):
-	if character_id.is_empty() or not item_to_equip or not item_to_equip.equipment_props:
-		return
-
-	var equipment = get_character_equipment(character_id)
-	var slot_enum = item_to_equip.equipment_props.slot
-
-	if equipment.has(slot_enum):
-		unequip_item_for_character(character_id, slot_enum)
-
-	remove_item(item_to_equip, 1)
-	equipment[slot_enum] = item_to_equip
-
-	_sync_character_equipped_slots(character_id, equipment)
-	calculate_total_stats(character_id)
-
-func unequip_item_for_character(character_id: String, slot_enum: EquipmentComponent.EquipmentSlot):
-	if character_id.is_empty():
-		return
-
-	var equipment = get_character_equipment(character_id, false)
-	if not equipment or not equipment.has(slot_enum):
-		return
-
-	var item_to_unequip = equipment[slot_enum]
-	equipment.erase(slot_enum)
-	if item_to_unequip:
-		add_item(item_to_unequip, 1)
-
-	_sync_character_equipped_slots(character_id, equipment)
-	calculate_total_stats(character_id)
-
-func equip_item(item_to_equip: Item):
-	equip_item_for_character(_get_current_player_id(), item_to_equip)
-
-func unequip_item(slot_enum: EquipmentComponent.EquipmentSlot):
-	unequip_item_for_character(_get_current_player_id(), slot_enum)
 
 # --- [新增] 队伍管理核心函数 ---
 
@@ -489,7 +388,7 @@ func new_game():
 	player_current_inventory.clear()
 	for slot_data in initial_player_inventory:
 		if slot_data and slot_data.item:
-			add_item(slot_data.item, slot_data.quantity)
+			InventoryManager.add_item(slot_data.item, slot_data.quantity)
 	equipment_by_character.clear()
 
 	player_known_recipes.clear()

@@ -27,7 +27,7 @@ func _ready() -> void:
 func add_from_inventory(item: Item, quantity: int = -1) -> bool:
 	if not item:
 		return false
-	var amount := quantity if quantity >= 0 else GameManager.count_item(item)
+	var amount := quantity if quantity >= 0 else InventoryManager.count_item(item)
 	if amount <= 0:
 		return false
 
@@ -43,7 +43,7 @@ func add_from_inventory(item: Item, quantity: int = -1) -> bool:
 func assign_to_slot(index: int, item: Item, quantity: int = -1) -> void:
 	if not _is_valid_index(index) or not item:
 		return
-	var amount := quantity if quantity >= 0 else GameManager.count_item(item)
+	var amount := quantity if quantity >= 0 else InventoryManager.count_item(item)
 	_set_slot(index, item, amount)
 
 func remove_slot(index: int) -> void:
@@ -102,7 +102,7 @@ func load_from_data(data: Array) -> void:
 				"quantity": entry.get("quantity", 0)
 			}
 		elif entry is Item:
-			slots[i] = {"item": entry, "quantity": GameManager.count_item(entry)}
+			slots[i] = {"item": entry, "quantity": InventoryManager.count_item(entry)}
 		else:
 			slots[i] = _empty_slot()
 	_refresh_quantities(false)
@@ -148,14 +148,14 @@ func _consume_item(slot_index: int, item: Item) -> void:
 	stats.current_mana = clampi(stats.current_mana, 0, stats.max_mana)
 	stats.current_satiety = clampi(stats.current_satiety, 0, stats.max_satiety)
 
-	GameManager.remove_item(item, 1)
+	InventoryManager.remove_item(item, 1)
 	item_consumed.emit(slot_index, item)
 	_after_inventory_mutation(slot_index)
 
 func _equip_item(slot_index: int, item: Item) -> void:
 	if not item or not item.equipment_props:
 		return
-	GameManager.equip_item(item)
+	InventoryManager.equip_item(item)
 	item_equipped.emit(slot_index, item)
 	_after_inventory_mutation(slot_index)
 
@@ -165,7 +165,7 @@ func _unequip_item(slot_index: int, item: Item) -> void:
 	var character := GameManager.current_player_data
 	if not character:
 		return
-	GameManager.unequip_item_for_character(character.character_id, item.equipment_props.slot)
+	InventoryManager.unequip_item_for_character(character.character_id, item.equipment_props.slot)
 	item_unequipped.emit(slot_index, item)
 	_after_inventory_mutation(slot_index)
 
@@ -182,7 +182,7 @@ func _drop_item(slot_index: int, item: Item) -> void:
 	drop_parent.add_child(world_item)
 	world_item.global_position = _resolve_drop_position(drop_parent)
 
-	GameManager.remove_item(item, 1)
+	InventoryManager.remove_item(item, 1)
 	item_dropped.emit(slot_index, item)
 	_after_inventory_mutation(slot_index)
 
@@ -220,7 +220,7 @@ func _refresh_quantities(broadcast: bool = true) -> void:
 		var slot := slots[i]
 		if not slot["item"]:
 			continue
-		var count := GameManager.count_item(slot["item"])
+		var count := InventoryManager.count_item(slot["item"])
 		if count <= 0:
 			slots[i] = _empty_slot()
 			slot_changed.emit(i, slots[i])

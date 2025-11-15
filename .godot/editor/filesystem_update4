@@ -56,3 +56,11 @@ res://Resources/tree_to_harvest.tres
 res://Resources/wood.tres
 res://UI/QuickBar.tscn
 res://UI/ItemActionMenu.tscn
+res://Scripts/BattleManager.gd
+res://Scripts/CookingUI.gd
+res://Scripts/CraftingMenu.gd
+res://Scripts/DialogueActionAdvanceObjective.gd
+res://Scripts/QuickbarManager.gd
+res://Scripts/StatusScreen.gd
+res://Scripts/WorldItem.gd
+res://Scripts/InventoryManager.gd

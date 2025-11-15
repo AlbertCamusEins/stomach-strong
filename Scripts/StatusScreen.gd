@@ -35,7 +35,7 @@ func _unhandled_input(event: InputEvent):
 func _on_inventory_item_clicked(item: Item):
 	if item.equipment_props:
 		# 如果点击的是装备，就调用 GameManager 的装备函数
-		GameManager.equip_item(item)
+		InventoryManager.equip_item(item)
 		# 刷新整个界面
 		refresh_data()
 	elif item.consumable_props:
@@ -44,7 +44,7 @@ func _on_inventory_item_clicked(item: Item):
 
 func _on_equipment_slot_clicked(slot: EquipmentComponent.EquipmentSlot):
 	# 调用 GameManager 的卸下装备函数
-	GameManager.unequip_item(slot)
+	InventoryManager.unequip_item(slot)
 	# 刷新整个界面
 	refresh_data()
 

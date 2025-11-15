@@ -27,5 +27,5 @@ func _unhandled_input(event: InputEvent):
 	if prompt_label.visible and event.is_action_pressed("ui_accepted"):
 		if item:
 			print("捡起地上物品：" + item.item_name)
-			GameManager.add_item(item,1)
+			InventoryManager.add_item(item,1)
 			self.queue_free()

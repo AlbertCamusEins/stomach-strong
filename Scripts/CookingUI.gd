@@ -73,7 +73,7 @@ func update_recipe_details():
 		child.queue_free()
 	
 	for req in selected_recipe.ingredients:
-		var player_count = GameManager.count_item(req.item)
+		var player_count = InventoryManager.count_item(req.item)
 		var has_enough = player_count >= req.quantity
 		
 		var name_label = Label.new()
@@ -137,10 +137,10 @@ func _on_cook_button_pressed():
 		
 	# 消耗食材
 	for req in selected_recipe.ingredients:
-		GameManager.remove_item(req.item, req.quantity)
+		InventoryManager.remove_item(req.item, req.quantity)
 		
 	# 添加产出
-	GameManager.add_item(selected_recipe.output_item, selected_recipe.output_quantity)
+	InventoryManager.add_item(selected_recipe.output_item, selected_recipe.output_quantity)
 	
 	print("制作成功: %s x%d" % [selected_recipe.output_item.item_name, selected_recipe.output_quantity])
 	

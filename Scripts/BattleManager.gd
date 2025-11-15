@@ -373,7 +373,7 @@ func _on_victory_loot_clicked(item: Item) -> void:
 		return
 	var loot_item: Item = entry.get("item")
 	if loot_item:
-		GameManager.add_item(loot_item, quantity)
+		InventoryManager.add_item(loot_item, quantity)
 	entry["quantity"] = 0
 	entry["claimed"] = true
 	pending_loot[key] = entry
@@ -387,7 +387,7 @@ func _on_victory_confirmed() -> void:
 			continue
 		var loot_item: Item = entry.get("item")
 		if loot_item:
-			GameManager.add_item(loot_item, quantity)
+			InventoryManager.add_item(loot_item, quantity)
 		entry["quantity"] = 0
 		entry["claimed"] = true
 		pending_loot[key] = entry
@@ -508,7 +508,7 @@ func _on_target_selected(target: Combatant):
 				target.stats.change_satiety(props.satiety_change)
 			battle_ui.update_all_statuses()
 			battle_ui.log_message("%s 对 %s 使用了 %s" % [attacker.name, target.name, pending_item.item_name])
-			GameManager.remove_item(pending_item,1)
+			InventoryManager.remove_item(pending_item,1)
 		else:
 			battle_ui.log_message("物品无效或不可使用")
 		pending_action_type = ""
@@ -581,8 +581,8 @@ func _on_player_use_food(food_item: Item):
 		current_actor.stats.change_satiety(props.satiety_change)
 	battle_ui.update_all_statuses()
 	battle_ui.log_message("%s 使用了 %s" % [current_actor.name, food_item.item_name])
-	# 扣除物品数量 -> GameManager.remove_item(food_item, 1)
-	GameManager.remove_item(food_item, 1)
+	# 扣除物品数量 -> InventoryManager.remove_item(food_item, 1)
+	InventoryManager.remove_item(food_item, 1)
 	check_for_win_lose()
 
 # 在技能菜单中选择具体技能
@@ -625,7 +625,7 @@ func _on_player_choose_weapon(weapon: Item):
 	var char_id := String(character_data.character_id)
 	var used_game_manager := false
 	if not char_id.is_empty() and GameManager.all_characters.has(char_id):
-		GameManager.equip_item_for_character(char_id, weapon)
+		InventoryManager.equip_item_for_character(char_id, weapon)
 		used_game_manager = true
 	else:
 		_swap_weapon_for_combatant_only(character_data, weapon)
@@ -656,8 +656,8 @@ func _swap_weapon_for_combatant_only(character_data: CharacterData, new_weapon: 
 	var previous_weapon: Item = null
 	if equipment.has(slot_enum):
 		previous_weapon = equipment[slot_enum]
-	GameManager.remove_item(new_weapon, 1)
+	InventoryManager.remove_item(new_weapon, 1)
 	equipment[slot_enum] = new_weapon
 	if previous_weapon:
-		GameManager.add_item(previous_weapon, 1)
+		InventoryManager.add_item(previous_weapon, 1)
 	character_data.equipped_slots = equipment

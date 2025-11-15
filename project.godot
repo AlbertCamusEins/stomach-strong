@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://Scenes/GameManager.tscn"
 DialogueManager="*res://Scripts/DialogueManager.gd"
 QuickbarManager="*res://Scripts/QuickbarManager.gd"
+InventoryManager="*res://Scripts/InventoryManager.gd"
 
 [display]
 

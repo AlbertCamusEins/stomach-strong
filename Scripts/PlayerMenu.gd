@@ -329,7 +329,7 @@ func _update_inventory_highlight() -> void:
 func _on_equipment_slot_clicked(slot_enum: EquipmentComponent.EquipmentSlot) -> void:
 	if selected_character_id.is_empty():
 		return
-	GameManager.unequip_item_for_character(selected_character_id, slot_enum)
+	InventoryManager.unequip_item_for_character(selected_character_id, slot_enum)
 	refresh_selected_character()
 	_update_inventory_display()
 
@@ -372,7 +372,7 @@ func _consume_inventory_item(item: Item) -> void:
 		stats.current_health = clamp(stats.current_health, 0, stats.max_health)
 		stats.current_mana = clamp(stats.current_mana, 0, stats.max_mana)
 		stats.current_satiety = clamp(stats.current_satiety, 0, stats.max_satiety)
-		GameManager.remove_item(item, 1)
+		InventoryManager.remove_item(item, 1)
 		refresh_selected_character()
 		_update_inventory_display()
 		return
@@ -510,7 +510,7 @@ func _execute_inventory_action(action_id: int, item: Item) -> void:
 # 将原有装备与食用逻辑提炼成复用函数
 func _equip_item(item: Item) -> void:
 	if item.equipment_props and not selected_character_id.is_empty():
-		GameManager.equip_item_for_character(selected_character_id, item)
+		InventoryManager.equip_item_for_character(selected_character_id, item)
 		refresh_selected_character()
 
 func _consume_item(item: Item) -> void:

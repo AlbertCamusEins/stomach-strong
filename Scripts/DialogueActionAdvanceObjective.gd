@@ -32,5 +32,5 @@ func execute(context: Dictionary) -> void:
 			gm.completed_quests.append(quest_id)
 		gm.active_quests.erase(quest_id)
 		for item in quest.item_rewards.keys():
-			GameManager.add_item(item, quest.item_rewards[item])
+			InventoryManager.add_item(item, quest.item_rewards[item])
 			

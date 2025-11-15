@@ -517,7 +517,7 @@ func _consume_materials() -> void:
 		reserved_counts[slot] = max(0, reserved_amount - 1)
 		if reserved_counts[slot] == 0:
 			reserved_counts.erase(slot)
-		GameManager.remove_item(item, 1)
+		InventoryManager.remove_item(item, 1)
 	QuickbarManager.notify_inventory_changed()
 	emit_signal("request_inventory_sync")
 	_refresh_inventory_display()
@@ -529,7 +529,7 @@ func _grant_output(recipe: CraftingRecipe) -> void:
 	var output_item: Item = recipe.output_item
 	if output_item:
 		var quantity: int = max(1, recipe.output_quantity)
-		GameManager.add_item(output_item, quantity)
+		InventoryManager.add_item(output_item, quantity)
 		QuickbarManager.notify_inventory_changed()
 		emit_signal("request_inventory_sync")
 		_update_portrait(output_item)

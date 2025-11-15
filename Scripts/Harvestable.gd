@@ -33,7 +33,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accepted"):
 		if current_harvests > 0:
 			print("采集资源： " + harvestable_item.item_to_harvest.item_name)
-			GameManager.add_item(harvestable_item.item_to_harvest, harvestable_item.amount_per_harvest)
+			InventoryManager.add_item(harvestable_item.item_to_harvest, harvestable_item.amount_per_harvest)
 			current_harvests -= 1
 			print(current_harvests)
 			sprite.frame = harvestable_item.max_harvests - current_harvests
